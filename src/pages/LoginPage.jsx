@@ -9,13 +9,15 @@ function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const handleRegister = async () => {
+  
+  const handleRegister = async (e) => {
+    e.preventDefault();
     const User = {
       email: email,
       password: password,
     };
     try {
-      let res = await fetch("http://localhost:3001/users/login", {
+      let res = await fetch("https://epichat1.herokuapp.com/users/login", {
         method: "POST",
         body: JSON.stringify(User),
         headers: { "Content-type": "application/json" },
@@ -26,9 +28,9 @@ function LoginPage() {
         // setOpen(true);
       }
       if (res.ok) {
-        let data = await res.json();
-        console.log(data.posts);
-        localStorage.setItem("MyToken", data.token);
+        let {accessToken} = await res.json();
+        console.log(accessToken, "adsasdasfa");
+        localStorage.setItem("MyToken", accessToken);
         navigate("/");
         console.log("Successfully logged in!");
       }
@@ -36,9 +38,7 @@ function LoginPage() {
       console.log(error);
     }
   };
-  const handelRegister = () => {
-    handleRegister();
-  };
+  
   return (
     <>
     <div className="loginbackground d-flex flex-column justify-content-center">
@@ -80,7 +80,7 @@ function LoginPage() {
               />
               <button
                 type="submit"
-                onClick={() => handelRegister()}
+                
                 disabled={!email || !password}
                 className="register-button"
               >

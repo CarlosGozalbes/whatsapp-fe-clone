@@ -16,6 +16,10 @@ background-color: white;
     text-decoration: none;
 }
 
+.notextdecorationnn{
+    color: black !important;
+}
+
 .leftcolumn{
     border-right: 1px solid rgb(182, 182, 182);
 }

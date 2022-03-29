@@ -2,44 +2,49 @@ import React, { useEffect, useState } from "react";
 import { Container, Image, Row, Col } from "react-bootstrap";
 import whatsapplogo from "./../assets/whatsapp-logo.png";
 import { AiFillApple } from "react-icons/ai";
-import { FaFacebookSquare, FaGoogle } from "react-icons/fa";
+import { FaFacebookSquare, FaGoogle, FaGithub } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
 function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [userName, setUserName] =useState('')
   const navigate = useNavigate();
 
-  const handleRegister = async () => {
+  const handleRegister = async (e) => {
+    e.preventDefault()
     const newUser = {
       email: email,
       password: password,
+      userName: userName
     };
     try {
-      let res = await fetch("http://localhost:3001/users/register", {
-        method: "POST",
-        body: JSON.stringify(newUser),
-        headers: { "Content-type": "application/json" },
-      });
+      let res = await fetch(
+        "http://localhost:3001/users/register", //https://epichat1.herokuapp.com
+        {
+          method: "POST",
+          body: JSON.stringify(newUser),
+          headers: { "Content-type": "application/json" },
+        }
+      );
       if (res.status !== 200) {
         // handleOpen();
         alert("you you entered wrong password or email");
         // setOpen(true);
       }
       if (res.ok) {
-        let data = await res.json();
-        localStorage.setItem("MyToken", data.token);
+        let {data} = await res.json();
+        /* localStorage.setItem("MyToken", data.token); */
         console.log(data.posts);
         console.log("Successfully registered!");
-        navigate("/");
+        alert("Succesfully registered");
+        navigate("/login");
       }
     } catch (error) {
       console.log(error);
     }
   };
-  const handelRegister = () => {
-    handleRegister();
-  };
+  
   return (
     <>
       <div className="loginbackground d-flex flex-column justify-content-center">
@@ -62,6 +67,18 @@ function RegisterPage() {
                 onSubmit={handleRegister}
                 className="d-flex flex-column mx-4"
               >
+                <label for="username" className="mb-0">
+                  <b> User Name</b>
+                </label>
+
+                <input
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
+                  className="registerinputs"
+                  type="text"
+                  id="username"
+                  placeholder="user name"
+                />
                 <label for="email" className="mb-0">
                   <b> Email address</b>
                 </label>
@@ -88,7 +105,6 @@ function RegisterPage() {
                 />
                 <button
                   type="submit"
-                  onClick={() => handelRegister()}
                   disabled={!email || !password}
                   className="register-button"
                 >
@@ -106,6 +122,15 @@ function RegisterPage() {
                   <div className="mt-1 continue-with-btn">
                     <FaGoogle className="iconssRegister" />
                     Continue with Google
+                  </div>
+                </a>
+                <a
+                  href="http://localhost:3001/users/googleLogin"
+                  className="text-decoration-none"
+                >
+                  <div className="mt-3 continue-with-btn ">
+                    <FaGithub className="iconssRegister" />
+                    Continue with Github
                   </div>
                 </a>
                 <div className="mt-3 continue-with-btn ">
