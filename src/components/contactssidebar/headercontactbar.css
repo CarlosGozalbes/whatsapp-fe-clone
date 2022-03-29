@@ -1,0 +1,42 @@
+.header-with-profile{
+    background-color: #ededed;
+    width: 100%;
+    height: 4.2rem;
+    position:absolute;
+    top:0px;
+    
+}
+.header-icons{
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+.input-search-contact-container{
+    display: flex;
+    display: block;
+    align-items: center;
+    height: 2.5rem;
+    position:absolute;
+    background-color: #ededed;
+    width: 94%;
+    margin: 0.5rem 1rem 0.5rem 1.2rem;
+    border-radius: 10px;
+    top:4.2rem;
+    
+    
+    
+}
+
+.search-contact-input{
+    border:none;
+    font-size: 0.7rem;
+    background-color: #ededed; 
+    width: 80%;
+    outline: none;
+    padding: 0.7rem;
+    margin-left: 1rem;
+}
+
+.search-contact-input:focus{
+    border:none
+}
