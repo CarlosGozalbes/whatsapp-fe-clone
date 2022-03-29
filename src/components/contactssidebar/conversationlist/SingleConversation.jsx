@@ -15,11 +15,11 @@ export default function SingleConversation() {
         />
         <div className="d-flex flex-column details-list">
           <div className="d-flex justify-content-between mt-3">
-            <span>Nombre</span>
-            <span className="last-message-date  pt-1">fecha</span>
+            <span>Nombre Apellido</span>
+            <span className="last-message-date  pt-1">friday</span>
           </div>
           <span className="preview-truncate-message">
-            mensaje safdsa dasfffffffsadfdfasdfad safsdfasdfasdfasdfasdfad safsdafs dfasd fadafa
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum laudantium itaque ipsa quisquam enim, voluptate distinctio asperiores, aliquam accusantium eum, fugit corrupti dolore nisi maxime qui excepturi repellat dignissimos harum.
           </span>
         </div>
         <div className="message-without-read align-self-end ml-2 mb-3"> 1 </div>
