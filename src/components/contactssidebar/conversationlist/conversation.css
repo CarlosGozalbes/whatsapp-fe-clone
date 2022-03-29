@@ -4,12 +4,14 @@
     max-height: calc(100% - 7.7rem);
     border-top: 1px solid rgb(214, 214, 214);
     top: 7.7rem;
-    min-width: 100%
+    min-width: 100%;
+    ;
 }
 
 .single-conversation-container{
     min-width: 100%;
     margin-left: 0 !important;
+    margin-right: 0 !important;
     padding-right: 1rem;
     cursor: pointer;
 }
