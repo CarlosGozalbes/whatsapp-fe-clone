@@ -1,9 +1,17 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './headercontactbar.css'
 import { Image } from 'react-bootstrap'
 import avatar from '../../assets/avatar.png'
 import { BsThreeDots, BsPlusLg, BsFullscreen, BsSearch } from "react-icons/bs";
-export default function HeaderContactBar() {
+
+
+
+
+
+
+
+
+export default function HeaderContactBar({ setShowSideBar, showSideBar }) {
   return (
     <>
       <header className="header-with-profile d-flex justify-content-between">
@@ -13,6 +21,8 @@ export default function HeaderContactBar() {
             src={avatar}
             height={50}
             className=" mx-3 my-2"
+            onClick={() => setShowSideBar(!showSideBar)}
+            style={{cursor:'pointer'}}
           />
           <span>My Name</span>
         </div>

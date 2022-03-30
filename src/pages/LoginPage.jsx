@@ -12,6 +12,7 @@ function LoginPage() {
   
   const handleRegister = async (e) => {
     e.preventDefault();
+    const MyToken = localStorage.getItem('MyToken')
     const User = {
       email: email,
       password: password,
