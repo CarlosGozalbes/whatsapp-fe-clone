@@ -5,21 +5,23 @@ import './headercontactbar.css'
 import avatar123 from "../../assets/avatar.png";
 import { Image } from 'react-bootstrap';
 import {BsPenFill} from 'react-icons/bs'
+
 export default function ContactsSideBar() {
   
   const [showSideBar, setShowSideBar] = useState(false);
   const [inputUserName, setInputUserName] = useState("");
   const [inputInfo, setInputInfo] = useState("");
-  const [avatar, setAvatar] = useState(null);
+  const [imageToDisplay,setImageToDisplay] = useState()
   const [selectedPic, setSelectedPic] = useState();
-  
+  const MyToken = localStorage.getItem("MyToken");
+
   const handleEditProfile = async (e) => {
     e.preventDefault();
-    const MyToken = localStorage.getItem("MyToken");
+    
     const newUserInfo = {
       username: inputUserName,
       info: inputInfo,
-      avatar: avatar,
+      
     };
     try {
       let res = await fetch(`${process.env.REACT_APP_BE_LINK}/me`, {
@@ -62,9 +64,40 @@ export default function ContactsSideBar() {
   //     // },
   //     body: formData,
   //   }
+  // let fileReader = new FileReader();
+  // const readableImage = fileReader.readAsDataURL(selectedPic);
 
+  const handleChangePic = (e) => {
+    setImageToDisplay(URL.createObjectURL(e.target.files[0]));
+    setSelectedPic(e.target.files[0]);
+    
+  
+  };
+  const handleSavePic = async (e) => {
+    e.preventDefault();
 
-
+    const formData = new FormData();
+    formData.append("userAvatar", selectedPic);
+    try {
+      let response = await fetch(
+        `${process.env.REACT_APP_BE_LINK}/users/me/avatar`,
+        {
+          method: "POST",
+          body: formData,
+          Authorization: `Bearer ${MyToken}`,
+        }
+      );
+      
+      if (response.ok) {
+        alert("Image saved successfully");
+        //actualise the redux state
+      } else {
+        alert("Error uploading image");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 
 
@@ -85,26 +118,33 @@ export default function ContactsSideBar() {
           <div className="d-flex justify-content-center py-4">
             <Image
               roundedCircle
-              src={selectedPic ? selectedPic : avatar123}
+              src={selectedPic ? imageToDisplay : avatar123}
               height={250}
+              width={250}
               className=" mx-3 my-2"
             />
           </div>
           <div>
+            <div className="personal-info-form-container pb-0">
+              <label for="picture" className="mb-0 ">
+                <b> Profile picture</b>
+              </label>
+              <input
+                type="file"
+                id="picture"
+                onChange={(e) => handleChangePic(e)}
+                className="inputs-personal-info"
+              />
+              <button
+                className="submit-personal-info"
+                onClick={(e) => handleSavePic(e)}
+              >
+                Save
+              </button>
+            </div>
             <form onSubmit={handleEditProfile}>
               <div className="personal-info-form-container">
-                <label for="picture" className="mb-0 ">
-                  <b> Profile picture</b>
-                </label>
-                <input
-                  type="file"
-                  id="picture"
-                  value={avatar}
-                  onChange={(e) => setAvatar(e.target.value)}
-                  className="inputs-personal-info"
-                />
-
-                <label for="username" className="mb-0 mt-4">
+                <label for="username" className="mb-0 mt-2">
                   <b> User Name</b>
                 </label>
                 <div>
@@ -118,7 +158,7 @@ export default function ContactsSideBar() {
                   <BsPenFill className="ml-4" />
                 </div>
 
-                <label for="picture" className="mb-0 mt-4">
+                <label for="picture" className="mb-0 mt-2">
                   <b>Info</b>
                 </label>
                 <div>

@@ -1,8 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
 import ContactsSideBar from '../components/contactssidebar/ContactsSideBar'
 import ConversationDetails from '../components/conversationdetails/ConversationDetails'
 import './mainpage.css'
 import { Row,Col } from 'react-bootstrap'
+import EmptyConversation from '../components/conversationdetails/EmptyConversation'
 /* import { AnimatePresence, motion } from "framer-motion"; */
 
 
@@ -57,6 +58,7 @@ import { Row,Col } from 'react-bootstrap'
 
 function MainPage() {
   /* const [sideBar, setSideBar] = useState(false); */
+  const [selectedConversation, setSelectedConversation] = useState()
   return (
     <>
       <Row style={{ maxWidth: "100vw", marginRight: "0px", marginLeft: "0px" }}>
@@ -66,7 +68,7 @@ function MainPage() {
         </Col>
         {
           <Col md={8} className="coversation-details">
-            <ConversationDetails />
+            {selectedConversation ? <ConversationDetails /> : <EmptyConversation/>}
           </Col>
         }
       </Row>

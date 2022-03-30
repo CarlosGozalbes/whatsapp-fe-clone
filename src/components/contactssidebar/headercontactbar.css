@@ -76,7 +76,7 @@
 
 .inputs-personal-info {
     border: none;
-    padding: 1rem;
+    padding: 0.7rem;
     width: 400px;
     border-bottom: #06d755 solid 3px;
 }
@@ -85,10 +85,16 @@
     border: none;
     padding:1rem;
     border-radius:10px;
-    margin:auto;
-    margin-bottom: 1rem;
-    margin-top: 2rem;
+    margin-left:45%;
+    
+    margin-top: 1rem;
     background-color: #06d755;
     color: white;
     font-weight: 600;
+    min-width: 8rem;
+}
+
+.userinfo-info{
+    font-size: 0.7rem;
+    font-weight: 200;
 }
