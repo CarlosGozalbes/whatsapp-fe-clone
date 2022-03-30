@@ -68,7 +68,7 @@ function MainPage() {
         </Col>
         {
           <Col md={8} className="coversation-details">
-            {selectedConversation ? <ConversationDetails /> : <EmptyConversation/>}
+            {selectedConversation ? <ConversationDetails/> : <EmptyConversation/>}
           </Col>
         }
       </Row>
