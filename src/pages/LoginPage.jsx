@@ -12,6 +12,7 @@ function LoginPage() {
   
   const handleRegister = async (e) => {
     e.preventDefault();
+    
     const User = {
       email: email,
       password: password,
