@@ -5,24 +5,6 @@ export default function ConversationsList() {
   return (
     <div className="d-flex flex-column conversation-list">
       <SingleConversation />
-      <SingleConversation />
-      <SingleConversation />
-      <SingleConversation />
-      <SingleConversation />
-      <SingleConversation />
-      <SingleConversation />
-      <SingleConversation />
-      <SingleConversation />
-      <SingleConversation />
-      <SingleConversation />
-      <SingleConversation />
-      <SingleConversation />
-      <SingleConversation />
-      <SingleConversation />
-      <SingleConversation />
-      <SingleConversation />
-      <SingleConversation />
-      <SingleConversation />
     </div>
   );
 }
