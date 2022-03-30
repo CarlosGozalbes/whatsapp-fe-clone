@@ -2,7 +2,6 @@ import { createStore, combineReducers, compose, applyMiddleware } from "redux";
 
 import thunk from "redux-thunk";
 
-import userInfoReducer from "../reducers/userInfoReducer";
 
 import localStorage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
@@ -14,17 +13,12 @@ const aComposeFunctionThatAlwaysWorks =
 
 
 export const initialState = {
-    userInfo: {
-      _id: "",
-      name: "",
-      email: "",
-      avatar: "",
-    },
+    userInfo: [],
     chats: {
-      active: "ID_CHAT_WITH_MAY", // the _id of one of the chats among store.chats.list
+      active: "ID_CHAT_WITH_USER", // the _id of one of the chats among store.chats.list
       list: [
           {
-              "_id": "ID_CHAT_WITH_MAY",
+              "_id": "ID_CHAT_WITH_USER",
               "messages": [
                   //..previous messages....
                   // the new message
@@ -40,7 +34,7 @@ const persistConfig = {
   storage: localStorage,
   transforms: [
     encryptTransform({
-      secretKey: process.env.REACT_APP_SECRET_PERSIST_KEY,
+      secretKey: "my-super-secret-key-999",
     }),
   ],
 };

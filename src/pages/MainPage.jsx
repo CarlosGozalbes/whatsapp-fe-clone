@@ -7,22 +7,18 @@ import { useDispatch } from 'react-redux'
 function MainPage() {
 
 
-  // const dipatch = useDispatch()
   // const token = localStorage.getItem("MyToken")
   // console.log("MyToken",token);
+  const dispatch = useDispatch()
 
 
-  // useEffect(()=> {
 
-    
-
-  // },[])
 
 
 
   return (
     <>
-        <Button variant="success">Send message</Button>
+        <Button variant="success" onClick={()=> {dispatch({ type: "EMIT_TEST" })}}>Send message</Button>
       <Row
         style={{ maxWidth: "100vw", marginRight: "0px", marginLeft: "0px" }}
       >
