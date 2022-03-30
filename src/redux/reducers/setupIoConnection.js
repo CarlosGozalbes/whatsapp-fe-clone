@@ -1,14 +1,14 @@
 //import store
 
 export default function setupConnection(socket) {
-  socket.on("connect", () => {
+  socket.on("connection", () => {
     console.log("connection established!");
   });
 
   socket.on("loggedin", () => {
     console.log("You're correctly logged in now");
 
-    socket.on("newConnection", () => {
+    socket.on("new-connection", () => {
       console.log("Another client is connected!");
     });
 

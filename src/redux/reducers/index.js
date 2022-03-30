@@ -20,9 +20,9 @@ export const rootReducer = (state = initialState, action) => {
         ...state,
         socket: socket,
       };
-    case "EMIT_TEST":
-        state.socket.emit("testEvent", { message: "Hello"})
-        return state
+    //case "EMIT_TEST":
+    //    state.socket.emit("testEvent", { message: "Hello"})
+    //    return state
     case ACTIONS.NEW_MESSAGE:
     // const { sender, message} = action.payload
     // if (sender === state.userInfo._id) state.socket.emit("öutgoing_msg", message)

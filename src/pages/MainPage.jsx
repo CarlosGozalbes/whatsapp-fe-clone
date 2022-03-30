@@ -3,7 +3,7 @@ import ContactsSideBar from '../components/contactssidebar/ContactsSideBar'
 import ConversationDetails from '../components/conversationdetails/ConversationDetails'
 import './mainpage.css'
 import { Row,Col, Button } from 'react-bootstrap'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 function MainPage() {
 
 
@@ -13,12 +13,12 @@ function MainPage() {
 
 
 
-
+  const socket = useSelector(s => s.socket)
 
 
   return (
     <>
-        <Button variant="success" onClick={()=> {dispatch({ type: "EMIT_TEST" })}}>Send message</Button>
+        <Button variant="success" onClick={()=> {socket.emit("testEvent")}}>Send message</Button>
       <Row
         style={{ maxWidth: "100vw", marginRight: "0px", marginLeft: "0px" }}
       >
