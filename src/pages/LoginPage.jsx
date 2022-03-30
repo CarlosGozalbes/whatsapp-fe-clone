@@ -17,7 +17,8 @@ function LoginPage() {
       password: password,
     };
     try {
-      let res = await fetch("https://epichat1.herokuapp.com/users/login", {
+      let res = await fetch(`${process.env.REACT_APP_BE_LINK}/users/login`, {
+        //https://epichat1.herokuapp.com
         method: "POST",
         body: JSON.stringify(User),
         headers: { "Content-type": "application/json" },

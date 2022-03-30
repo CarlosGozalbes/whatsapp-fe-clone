@@ -20,7 +20,7 @@ function RegisterPage() {
     };
     try {
       let res = await fetch(
-        "http://localhost:3001/users/register", //https://epichat1.herokuapp.com
+        `${process.env.REACT_APP_BE_LINK}/users/register`, //https://epichat1.herokuapp.com
         {
           method: "POST",
           body: JSON.stringify(newUser),
@@ -33,9 +33,9 @@ function RegisterPage() {
         // setOpen(true);
       }
       if (res.ok) {
-        let {data} = await res.json();
+        //let {data} = await res.json();
         /* localStorage.setItem("MyToken", data.token); */
-        console.log(data.posts);
+        
         console.log("Successfully registered!");
         alert("Succesfully registered");
         navigate("/login");

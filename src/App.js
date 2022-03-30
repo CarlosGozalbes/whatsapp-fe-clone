@@ -4,6 +4,7 @@ import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 function App() {
+  console.log(process.env.REACT_APP_BE_LINK);
   return (
     <Router>
       <Routes>
