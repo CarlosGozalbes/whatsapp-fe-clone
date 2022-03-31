@@ -186,7 +186,7 @@ export default function HeaderContactBar({ setShowSideBar, showSideBar }) {
                         <ListItem
                           alignItems="flex-start"
                           className="list_item_search_users"
-                          style={{cursor:'pointer'}}
+                          style={{ cursor: "pointer" }}
                           onClick={startAConversationForReal}
                         >
                           <ListItemAvatar>
@@ -200,11 +200,7 @@ export default function HeaderContactBar({ setShowSideBar, showSideBar }) {
                             />
                           </ListItemAvatar>
                           <ListItemText
-                            primary={
-                              user.info
-                                ? user.info
-                                : "Hey there I'm using whatsApp"
-                            } //
+                            primary={user.username} //
                             secondary={
                               <React.Fragment>
                                 <Typography
@@ -213,7 +209,10 @@ export default function HeaderContactBar({ setShowSideBar, showSideBar }) {
                                   variant="body2"
                                   color="text.primary"
                                 >
-                                  {user.username}
+                                  {user.info
+                                    ? user.info
+                                    : "Hey there I'm using whatsApp"}
+
                                 </Typography>
                               </React.Fragment>
                             }
@@ -247,7 +246,7 @@ export default function HeaderContactBar({ setShowSideBar, showSideBar }) {
             aria-haspopup="true"
             onClick={handleClick}
           >
-            <MoreVertIcon style={{color:'white'}} />
+            <MoreVertIcon style={{ color: "white" }} />
           </IconButton>
         </div>
 
