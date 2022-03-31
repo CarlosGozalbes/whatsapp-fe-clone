@@ -1,79 +1,41 @@
 import React, { useEffect, useState } from "react";
+import { Typography } from "@mui/material/styles/createTypography";
 import ContactsSideBar from "../components/contactssidebar/ContactsSideBar";
 import ConversationDetails from "../components/conversationdetails/ConversationDetails";
 import "./mainpage.css";
-import { Row, Col } from "react-bootstrap";
 import EmptyConversation from "../components/conversationdetails/EmptyConversation";
-import { navigate } from "react-router-dom";
-/* import { AnimatePresence, motion } from "framer-motion"; */
 import { Link, useNavigate } from "react-router-dom";
-
-/* function Sidebar({ sideBar = false, setSideBar = () => {} }) {
-  return (
-    <AnimatePresence className="sideBarEditProfile">
-      {sideBar && (
-        <>
-          <motion.div
-            initial={{ x: "-100%" }}
-            animate={{
-              x: 0,
-              backgroundColor: "green",
-              zIndex: 999999999999999,
-              width: "100",
-            }}
-            exit={{
-              x: "-100%",
-            }}
-            transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-          >
-            <button
-              onClick={() => setSideBar((sideBar) => !sideBar)}
-              className=""
-            >
-              &times;
-            </button>
-            <h2 className="text-4xl capitalize leading-loose">hello!</h2>
-            <p className="leading-relaxed" style={{ zIndex: 10000 }}>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s.
-            </p>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{
-              opacity: 1,
-            }}
-            exit={{
-              opacity: 0,
-            }}
-            transition={{ type: "spring", bounce: 0, duration: 0.2 }}
-            onClick={() => setSideBar((sideBar) => !sideBar)}
-            className=""
-          />
-        </>
-      )}
-    </AnimatePresence>
-  );
-} */
+import { Row, Col, Button } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 
 function MainPage() {
-  /* const [sideBar, setSideBar] = useState(false); */
   const [selectedConversation, setSelectedConversation] = useState();
   const navigate = useNavigate();
 
-  /* useEffect(() => {
-    let myToken = localStorage.getItem("MyToken");
-    if (!myToken) {
-      navigate("/login");
-    }
-  }, [navigate]); */
+  //  useEffect(() => {
+  //   let myToken = localStorage.getItem("MyToken");
+  //   if (!myToken) {
+  //     navigate("/login");
+  //   }
+  // }, [navigate]);
+
+  // const token = localStorage.getItem("MyToken")
+  // console.log("MyToken",token);
+  const dispatch = useDispatch();
+  const socket = useSelector((s) => s.socket);
 
   return (
     <>
+      <Button
+        variant="success"
+        onClick={() => {
+          socket.emit("testEvent");
+        }}
+      >
+        Send message
+      </Button>
       <Row style={{ maxWidth: "100vw", marginRight: "0px", marginLeft: "0px" }}>
         <Col md={4} className="contacts-side-bar">
-          {/* <Sidebar {...{ sideBar, setSideBar }} /> */}
           <ContactsSideBar />
         </Col>
         {
