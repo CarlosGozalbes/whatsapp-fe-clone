@@ -83,7 +83,7 @@
     border: none;
     padding: 0.7rem;
     width: 400px;
-    border-bottom: #06d755 solid 3px;
+    border-bottom: #06d755 dashed 3px;
 }
 
 .submit-personal-info{

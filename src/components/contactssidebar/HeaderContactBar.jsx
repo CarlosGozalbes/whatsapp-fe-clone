@@ -38,9 +38,13 @@ const handleClick = (event) => {
 };
 const handleClose = () => {
   setAnchorEl(null);
+  
 };
 
-
+const handleCloseAndShowSideBar = () =>{
+  handleClose();
+  setShowSideBar(!showSideBar)
+}
 const handleClickOpenDialog = () => {
   handleClose();
   setOpenDialog(true);
@@ -89,7 +93,6 @@ return (
           src={avatar}
           height={50}
           className=" mx-3 my-2"
-          onClick={() => setShowSideBar(!showSideBar)}
           style={{ cursor: "pointer" }}
         />{" "}
         <div className="d-flex flex-column mt-3">
@@ -131,7 +134,7 @@ return (
           }}
         >
           <MenuItem onClick={handleClose}>Profile</MenuItem>
-          <MenuItem onClick={handleClose}>My account</MenuItem>
+          <MenuItem onClick={handleCloseAndShowSideBar}>My account</MenuItem>
           <MenuItem onClick={handleClickOpenDialog}>Logout</MenuItem>
         </Menu>
         <Dialog
