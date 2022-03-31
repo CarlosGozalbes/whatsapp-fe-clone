@@ -125,7 +125,11 @@ export default function HeaderContactBar({ setShowSideBar, showSideBar }) {
         <div className="d-flex">
           <Image
             roundedCircle
-            src={userReduxInformation.userInfo.avatar ? userReduxInformation.userInfo.avatar : avatar}
+            src={
+              userReduxInformation.userInfo.avatar
+                ? userReduxInformation.userInfo.avatar
+                : avatar
+            }
             height={50}
             className=" mx-3 my-2"
             style={{ cursor: "pointer" }}
@@ -149,13 +153,13 @@ export default function HeaderContactBar({ setShowSideBar, showSideBar }) {
             open={openSearchUserDialog}
             onClose={handleCloseSearchUserDialog}
           >
-            <DialogTitle>Start a new conversation</DialogTitle>
+            <DialogTitle>Start a conversation</DialogTitle>
             <DialogContent>
               <TextField
                 autoFocus
                 margin="dense"
                 id="name"
-                label="Search for an user"
+                label="Start a conversation"
                 type="text"
                 value={searchQueryUser}
                 onKeyDown={(event) => {
@@ -313,7 +317,7 @@ export default function HeaderContactBar({ setShowSideBar, showSideBar }) {
             }
           }}
           renderInput={(params) => (
-            <TextField {...params} label="Start a new conversation" />
+            <TextField {...params} label="Search in your chats" />
           )}
         />
       </div>

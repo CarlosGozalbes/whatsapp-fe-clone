@@ -136,7 +136,7 @@ export default function ContactsSideBar() {
           </div>
           <div>
             <div className="personal-info-form-container pb-0">
-              <label for="picture" className="mb-0 ">
+              <label htmlFor="picture" className="mb-0 ">
                 <b> Profile picture</b>
               </label>
               <input
@@ -154,7 +154,7 @@ export default function ContactsSideBar() {
             </div>
             <form onSubmit={handleEditProfile}>
               <div className="personal-info-form-container">
-                <label for="username" className="mb-0 mt-2">
+                <label htmlFor="username" className="mb-0 mt-2">
                   <b> User Name</b>
                 </label>
                 <div>
@@ -168,7 +168,7 @@ export default function ContactsSideBar() {
                   <BsPenFill className="ml-4" />
                 </div>
 
-                <label for="picture" className="mb-0 mt-2">
+                <label htmlFor="picture" className="mb-0 mt-2">
                   <b>Info</b>
                 </label>
                 <div>

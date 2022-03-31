@@ -10,12 +10,15 @@ export const getUserInfo = (token)=>{
     console.log(token)
      return async(dispatch)=> {
         try {
-            const response = await fetch("http://localhost:3001/users/me", {
-                method:"GET",
-                headers:{
-                    Authorization:`Bearer ${token}` 
-                }
-            })
+            const response = await fetch(
+              `${process.env.REACT_APP_BE_LINK}/users/me`,
+              {
+                method: "GET",
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            );
             if(response.ok){
                 const data = await response.json()
                 console.log(data);
@@ -34,12 +37,15 @@ export const getUserInfo = (token)=>{
 export const getActiveChat =(token)=>{
     return async(dispatch)=> {
         try {
-            const response = await fetch("http://localhost:3001/chat/:chatId", {
-                method:"GET",
-                headers:{
-                    Authorization:"Bearer " + token
-                }
-            })
+            const response = await fetch(
+              `${process.env.REACT_APP_BE_LINK}/chat/:chatId`,
+              {
+                method: "GET",
+                headers: {
+                  Authorization: "Bearer " + token,
+                },
+              }
+            );
             if(response.ok){
                 const data = await response.json()
                 console.log(data);

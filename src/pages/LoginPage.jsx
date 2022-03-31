@@ -65,7 +65,7 @@ function LoginPage() {
                 onSubmit={handleRegister}
                 className="d-flex flex-column mx-4"
               >
-                <label for="email" className="mb-0">
+                <label htmlFor="email" className="mb-0">
                   <b> Email address</b>
                 </label>
 
@@ -77,7 +77,7 @@ function LoginPage() {
                   id="email"
                   placeholder="Email address"
                 />
-                <label for="password" className="mb-0 mt-4">
+                <label htmlFor="password" className="mb-0 mt-4">
                   {" "}
                   <b> Password</b>
                 </label>
@@ -102,7 +102,7 @@ function LoginPage() {
               <div className="mx-4">
                 <h6>Or logging with</h6>
                 <a
-                  href={`${process.env.REACT_APP_BE_LINK}/users/googleLogin`} 
+                  href={`${process.env.REACT_APP_BE_LINK}/users/googleLogin`}
                   className="text-decoration-none"
                 >
                   <div className="mt-1 continue-with-btn links-color">

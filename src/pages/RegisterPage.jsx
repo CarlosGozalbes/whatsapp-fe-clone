@@ -67,7 +67,7 @@ function RegisterPage() {
                 onSubmit={handleRegister}
                 className="d-flex flex-column mx-4"
               >
-                <label for="username" className="mb-0">
+                <label htmlFor="username" className="mb-0">
                   <b> User Name</b>
                 </label>
 
@@ -79,7 +79,7 @@ function RegisterPage() {
                   id="username"
                   placeholder="user name"
                 />
-                <label for="email" className="mb-0 mt-4">
+                <label htmlFor="email" className="mb-0 mt-4">
                   <b> Email address</b>
                 </label>
 
@@ -91,7 +91,7 @@ function RegisterPage() {
                   id="email"
                   placeholder="Email address"
                 />
-                <label for="password" className="mb-0 mt-4">
+                <label htmlFor="password" className="mb-0 mt-4">
                   {" "}
                   <b> Password</b>
                 </label>
