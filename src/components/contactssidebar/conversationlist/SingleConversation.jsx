@@ -6,12 +6,12 @@ import './conversation.css'
 export default function SingleConversation() {
   return (
     <div>
-      <Row fluid className="d-flex single-conversation-container pl-2">
+      <Row  className="d-flex single-conversation-container pl-2">
         <Image
           roundedCircle
           src={avatar}
-          width={'9%'}
-          height={'8%'}
+          width={'10%'}
+          height={'10%'}
           className="conversation-list-avatar "
         />
         <div className="d-flex flex-column details-list">
