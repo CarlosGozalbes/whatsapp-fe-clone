@@ -13,8 +13,8 @@ export default function setupConnection(socket) {
     });
 
     
-    socket.on("NEW_MESSAGE", () => {
-        
+    socket.on("incoming-msg", message => {
+        //dispatch NEW_MESSAGE
         
     });
 
