@@ -6,6 +6,8 @@ export const ACTIONS = {
 }
 
 
+
+
 export const getUserInfo =(token)=>{
     return async(dispatch)=> {
         try {

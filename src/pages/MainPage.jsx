@@ -22,15 +22,20 @@ function MainPage() {
   // const token = localStorage.getItem("MyToken")
   // console.log("MyToken",token);
   const dispatch = useDispatch();
-  const socket = useSelector((s) => s.socket);
-
+  const socket = useSelector((state) => state.socket);
+  console.log("socket",socket);
+  
   return (
     <>
       <Button
         variant="success"
-        onClick={() => {
-          socket.emit("testEvent");
-        }}
+        onClick={() => dispatch({type:"INIT_SOCKET"})}
+      >
+        Init socket
+        </Button>
+      <Button
+        variant="success"
+        onClick={() => dispatch({type:"EMIT_TEST"})}
       >
         Send message
       </Button>

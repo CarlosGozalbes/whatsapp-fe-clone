@@ -1,4 +1,4 @@
-import io from "socket.io-client";
+import {io} from "socket.io-client";
 import { ACTIONS } from "../actions";
 import { initialState } from "../store";
 import setupConnection from "./setupIoConnection";
@@ -9,23 +9,36 @@ export const rootReducer = (state = initialState, action) => {
       // this means that you want to connect to the BE using directly some ID
       // the ID will be in the token retrieveable from the localStorage
       const token = localStorage.getItem("MyToken")
+      console.log(process.env.REACT_APP_BE_LINK, token)
       const socket = io(process.env.REACT_APP_BE_LINK, {
           transports: ["websocket"],
-          auth: token,
-        });
+          auth: { token },
+      });
 
+      socket.on("connect", () => {
+        console.log("connected")
+      })
+
+      console.log(socket)
+      
       setupConnection(socket)
 
       return {
         ...state,
         socket: socket,
       };
-    //case "EMIT_TEST":
-    //    state.socket.emit("testEvent", { message: "Hello"})
-    //    return state
-    case ACTIONS.NEW_MESSAGE:
-    // const { sender, message} = action.payload
-    // if (sender === state.userInfo._id) state.socket.emit("öutgoing_msg", message)
+    case "EMIT_TEST":
+      state.socket.emit("locationsEvent", {asd:"hello"})
+      return state
+      // state.socket.on("incoming-msg", { message: "Hello"})
+      // state.socket.on("incoming-msg", ({ message }) => {
+      //   console.log(message)
+
+      // return state
+      // })
+    // case ACTIONS.NEW_MESSAGE:
+    // const { sender, content} = action.payload
+    // if (sender === state.userInfo._id) state.socket.emit("outgoing_msg", message)
 
     // .....update the chat list
     // return {...state......}
