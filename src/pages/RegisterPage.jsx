@@ -79,7 +79,7 @@ function RegisterPage() {
                   id="username"
                   placeholder="user name"
                 />
-                <label for="email" className="mb-0">
+                <label for="email" className="mb-0 mt-4">
                   <b> Email address</b>
                 </label>
 
@@ -119,25 +119,25 @@ function RegisterPage() {
                   href="http://localhost:3001/users/googleLogin"
                   className="text-decoration-none"
                 >
-                  <div className="mt-1 continue-with-btn">
+                  <div className="mt-1 continue-with-btn links-color">
                     <FaGoogle className="iconssRegister" />
                     Continue with Google
                   </div>
                 </a>
                 <a
-                  href="http://localhost:3001/users/googleLogin"
+                  href="http://localhost:3001/users/githubLogin"
                   className="text-decoration-none"
                 >
-                  <div className="mt-3 continue-with-btn ">
+                  <div className="mt-3 continue-with-btn links-color">
                     <FaGithub className="iconssRegister" />
                     Continue with Github
                   </div>
                 </a>
-                <div className="mt-3 continue-with-btn ">
+                <div className="mt-3 continue-with-btn links-color">
                   <FaFacebookSquare className="iconssRegister" />
                   Continue with Facebook
                 </div>
-                <div className="mt-3 continue-with-btn">
+                <div className="mt-3 continue-with-btn links-color">
                   <AiFillApple className="iconssRegister" />
                   Continue with Apple
                 </div>

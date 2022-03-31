@@ -150,7 +150,7 @@ return (
           </DialogContent>
           <DialogActions>
             <Button onClick={handleCloseDialog}>No</Button>
-            <Link to="/login">
+            <Link to="/login" onClick={localStorage.setItem("MyToken", null)}>
               <Button onClick={localStorage.setItem("MyToken", null)} autoFocus>
                 Yes
               </Button>
