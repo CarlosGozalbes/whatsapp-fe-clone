@@ -7,11 +7,13 @@ import { BsEmojiSmile, BsPaperclip, BsMic } from "react-icons/bs";
 export default function SendMessageInput() {
     
     const [inputValue, setInputValue] = useState('')
-    const [showChosenEmoji, setShowChosenEmoji] = useState(false)
+    
     
     
     const handleSubmit = (inputValue) => {
       console.log(inputValue);
+      //dispatch new message and 
+      //socket.emit
     };
     return (
       <div className="send-message-input-container">
@@ -21,7 +23,7 @@ export default function SendMessageInput() {
         /> */}
         <BsEmojiSmile
           className="send-message-icons mr-3"
-          onClick={() => setShowChosenEmoji(!showChosenEmoji)}
+          
         />{" "}
         <BsPaperclip className="send-message-icons mr-3" />
         <input
