@@ -1,11 +1,12 @@
-import React, {useState} from 'react'
-import ContactsSideBar from '../components/contactssidebar/ContactsSideBar'
-import ConversationDetails from '../components/conversationdetails/ConversationDetails'
-import './mainpage.css'
-import { Row,Col } from 'react-bootstrap'
-import EmptyConversation from '../components/conversationdetails/EmptyConversation'
+import React, { useEffect, useState } from "react";
+import ContactsSideBar from "../components/contactssidebar/ContactsSideBar";
+import ConversationDetails from "../components/conversationdetails/ConversationDetails";
+import "./mainpage.css";
+import { Row, Col } from "react-bootstrap";
+import EmptyConversation from "../components/conversationdetails/EmptyConversation";
+import { navigate } from "react-router-dom";
 /* import { AnimatePresence, motion } from "framer-motion"; */
-
+import { Link, useNavigate } from "react-router-dom";
 
 /* function Sidebar({ sideBar = false, setSideBar = () => {} }) {
   return (
@@ -58,7 +59,16 @@ import EmptyConversation from '../components/conversationdetails/EmptyConversati
 
 function MainPage() {
   /* const [sideBar, setSideBar] = useState(false); */
-  const [selectedConversation, setSelectedConversation] = useState()
+  const [selectedConversation, setSelectedConversation] = useState();
+  const navigate = useNavigate();
+
+  /* useEffect(() => {
+    let myToken = localStorage.getItem("MyToken");
+    if (!myToken) {
+      navigate("/login");
+    }
+  }, [navigate]); */
+
   return (
     <>
       <Row style={{ maxWidth: "100vw", marginRight: "0px", marginLeft: "0px" }}>
@@ -92,7 +102,11 @@ function MainPage() {
         </Col>
         {
           <Col md={8} className="coversation-details">
-            {selectedConversation ? <ConversationDetails/> : <EmptyConversation/>}
+            {selectedConversation ? (
+              <ConversationDetails />
+            ) : (
+              <EmptyConversation />
+            )}
           </Col>
         }
       </Row>
@@ -100,4 +114,4 @@ function MainPage() {
   );
 }
 
-export default MainPage
+export default MainPage;
