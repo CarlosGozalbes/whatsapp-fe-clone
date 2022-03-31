@@ -1,5 +1,6 @@
 .header-with-profile{
-    background-color: #ededed;
+    background-color: #075E54;
+    color: white!important;
     width: 100% !important;
     height: 4.2rem;
     position:absolute;
@@ -102,4 +103,12 @@
 .userinfo-info{
     font-size: 0.7rem;
     font-weight: 200;
+}
+
+.list_item_search_users:hover{
+    background-color: #ededed
+}
+
+.css-78trlr-MuiButtonBase-root-MuiIconButton-root {
+    color: white;
 }

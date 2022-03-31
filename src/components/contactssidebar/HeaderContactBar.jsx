@@ -22,6 +22,13 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import Divider from "@mui/material/Divider";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import Typography from "@mui/material/Typography";
 
 export default function HeaderContactBar({ setShowSideBar, showSideBar }) {
   //   const dispatch = useDispatch();
@@ -29,9 +36,19 @@ export default function HeaderContactBar({ setShowSideBar, showSideBar }) {
   const [listOfUsers, setListOfUsers] = useState([]);
   const [value, setValue] = useState(null);
   const [inputValue, setInputValue] = useState("");
+  const [searchQueryUser, setSearchQueryUser] = useState("");
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [openDialog, setOpenDialog] = React.useState(false);
+  const [openSearchUserDialog, setOpenSearchUserDialog] = React.useState(false);
   const open = Boolean(anchorEl);
+  const handleClickOpenSearchUserDialog = () => {
+    setOpenSearchUserDialog(true);
+  };
+
+  const handleCloseSearchUserDialog = () => {
+    setOpenSearchUserDialog(false);
+  };
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -57,7 +74,7 @@ export default function HeaderContactBar({ setShowSideBar, showSideBar }) {
   //   Navigate('/login')
   // }
 
-  const fetchListOfUsers = async () => {
+  /* const fetchListOfUsers = async () => {
     try {
       let response = await fetch(`${process.env.REACT_APP_BE_LINK}/users`);
       if (response.ok) {
@@ -69,40 +86,149 @@ export default function HeaderContactBar({ setShowSideBar, showSideBar }) {
     } catch (error) {
       console.log(error);
     }
+  }; */
+
+  const fetchSearchUsers = async () => {
+    try {
+      let response = await fetch(
+        `http://localhost:3001/users/search?username=${searchQueryUser}` //${process.env.REACT_APP_BE_LINK}
+      );
+      
+      if (response.ok) {
+        let data = await response.json();
+        console.log(data);
+        setListOfUsers(data);
+      } else {
+        console.log("error happened fetching the users");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleChangeSearchQuery = (event) => {
+    setSearchQueryUser(event.target.value);
   };
 
   /* useEffect(() => {
   fetchListOfUsers()
 }, []); */
   /* useEffect(() => {
-  fetchSearch()
-}, [inputvalue]); */
+    //fetchSearchUsers();
+    fetchSearchUsers()
+    console.log(listOfUsers);
+  }, [searchQueryUser]); */
 
   const startAConversation = () => {
     console.log(value);
     setValue(null);
   };
 
-return (
-  <>
-    <header className="header-with-profile d-flex justify-content-between">
-      <div className="d-flex">
-        <Image
-          roundedCircle
-          src={avatar}
-          height={50}
-          className=" mx-3 my-2"
-          style={{ cursor: "pointer" }}
-        />{" "}
-        <div className="d-flex flex-column mt-3">
-          <span>userInfo.name</span>
-          <span className="userinfo-info">Userinfo.State</span>
-        </div>
+  const startAConversationForReal = (id) => {
+    console.log(id)
+  }
+
+  return (
+    <>
+      <header className="header-with-profile d-flex justify-content-between">
+        <div className="d-flex">
+          <Image
+            roundedCircle
+            src={avatar}
+            height={50}
+            className=" mx-3 my-2"
+            style={{ cursor: "pointer" }}
+          />{" "}
+          <div className="d-flex flex-column mt-3">
+            <span>userInfo.name</span>
+            <span className="userinfo-info">Userinfo.State</span>
+          </div>
         </div>
         <div className="header-options align-self-center ml-auto mr-3">
           <BsFullscreen className="mr-4 header-icons" />
-          <BsPlusLg className="mr-2 header-icons" />
-
+          <BsPlusLg
+            className="mr-2 header-icons"
+            onClick={handleClickOpenSearchUserDialog}
+          />
+          <Dialog
+            open={openSearchUserDialog}
+            onClose={handleCloseSearchUserDialog}
+          >
+            <DialogTitle>Start a new conversation</DialogTitle>
+            <DialogContent>
+              <TextField
+                autoFocus
+                margin="dense"
+                id="name"
+                label="Search for an user"
+                type="text"
+                value={searchQueryUser}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") {
+                    fetchSearchUsers();
+                  }
+                }}
+                onChange={handleChangeSearchQuery}
+                fullWidth
+                variant="standard"
+              />
+              <DialogContentText>
+                <List
+                  sx={{
+                    width: "100%",
+                    maxWidth: 360,
+                    bgcolor: "background.paper",
+                  }}
+                >
+                  {listOfUsers &&
+                    listOfUsers.map((user) => (
+                      <>
+                        <ListItem
+                          alignItems="flex-start"
+                          className="list_item_search_users"
+                          style={{cursor:'pointer'}}
+                          onClick={startAConversationForReal}
+                        >
+                          <ListItemAvatar>
+                            <Avatar
+                              alt="Remy Sharp"
+                              src={
+                                user.avatar
+                                  ? user.avatar
+                                  : "/static/images/avatar/1.jpg"
+                              } //user.avatar
+                            />
+                          </ListItemAvatar>
+                          <ListItemText
+                            primary={
+                              user.info
+                                ? user.info
+                                : "Hey there I'm using whatsApp"
+                            } //
+                            secondary={
+                              <React.Fragment>
+                                <Typography
+                                  sx={{ display: "inline" }}
+                                  component="span"
+                                  variant="body2"
+                                  color="text.primary"
+                                >
+                                  {user.username}
+                                </Typography>
+                              </React.Fragment>
+                            }
+                          />
+                        </ListItem>
+                        <Divider variant="inset" component="li" />{" "}
+                      </>
+                    ))}
+                </List>
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleCloseSearchUserDialog}>Cancel</Button>
+            </DialogActions>
+          </Dialog>
           {/* <Button
           id="basic-button"
           aria-controls={open ? "basic-menu" : undefined}
@@ -121,84 +247,84 @@ return (
             aria-haspopup="true"
             onClick={handleClick}
           >
-            <MoreVertIcon />
+            <MoreVertIcon style={{color:'white'}} />
           </IconButton>
         </div>
-      
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          "aria-labelledby": "basic-button",
-        }}
-      >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleCloseOpenSideBar}>My account</MenuItem>
-        <MenuItem onClick={handleClickOpenDialog}>Logout</MenuItem>
-      </Menu>
-      <Dialog
-        open={openDialog}
-        onClose={handleCloseDialog}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"Hope to see you soon!"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Are you sure you want to disconnect from whatsapp?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseDialog}>No</Button>
-          <Link
-            to="/login"
-            onClick={() => localStorage.setItem("MyToken", null)}
-          >
-            <Button
+
+        <Menu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            "aria-labelledby": "basic-button",
+          }}
+        >
+          <MenuItem onClick={handleClose}>Profile</MenuItem>
+          <MenuItem onClick={handleCloseOpenSideBar}>My account</MenuItem>
+          <MenuItem onClick={handleClickOpenDialog}>Logout</MenuItem>
+        </Menu>
+        <Dialog
+          open={openDialog}
+          onClose={handleCloseDialog}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            {"Hope to see you soon!"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Are you sure you want to disconnect from whatsapp?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseDialog}>No</Button>
+            <Link
+              to="/login"
               onClick={() => localStorage.setItem("MyToken", null)}
-              autoFocus
             >
-              Yes
-            </Button>
-          </Link>
-        </DialogActions>
-      </Dialog>
-    </header>
-    {/* <div className="input-search-contact-container"> */}
-    {/* <BsSearch className="ml-4" />
+              <Button
+                onClick={() => localStorage.setItem("MyToken", null)}
+                autoFocus
+              >
+                Yes
+              </Button>
+            </Link>
+          </DialogActions>
+        </Dialog>
+      </header>
+      {/* <div className="input-search-contact-container"> */}
+      {/* <BsSearch className="ml-4" />
         <input
           type="text"
           placeholder="search a chat or start a new one"
           className="search-contact-input"
         /> */}
-    <div className="input-search-contact-container-mui">
-      <Autocomplete
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
-        inputValue={inputValue}
-        onInputChange={(event, newInputValue) => {
-          setInputValue(newInputValue);
-        }}
-        id="controllable-states-demo"
-        options={top100Films}
-        getOptionLabel={(option) => option.title}
-        onKeyDown={(event) => {
-          if (event.key === "Enter") {
-            startAConversation();
-          }
-        }}
-        renderInput={(params) => (
-          <TextField {...params} label="Start a new conversation" />
-        )}
-      />
-    </div>
-    {/* <Autocomplete
+      <div className="input-search-contact-container-mui">
+        <Autocomplete
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
+          inputValue={inputValue}
+          onInputChange={(event, newInputValue) => {
+            setInputValue(newInputValue);
+          }}
+          id="controllable-states-demo"
+          options={top100Films}
+          getOptionLabel={(option) => option.title}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              startAConversation();
+            }
+          }}
+          renderInput={(params) => (
+            <TextField {...params} label="Start a new conversation" />
+          )}
+        />
+      </div>
+      {/* <Autocomplete
         id="size-small-standard"
         size="small"
         options={top100Films}
@@ -227,9 +353,9 @@ return (
         )}
       /> */}
 
-    {/* </div> */}
-  </>
-);
+      {/* </div> */}
+    </>
+  );
 }
 
 const top100Films = [
