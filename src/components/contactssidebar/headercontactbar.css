@@ -1,6 +1,6 @@
 .header-with-profile{
     background-color: #ededed;
-    width: 100%;
+    width: 100% !important;
     height: 4.2rem;
     position:absolute;
     top:0px;
