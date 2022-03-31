@@ -39,8 +39,8 @@ useEffect(() => {
             <div className="d-flex flex-column details-list">
               <div className="d-flex justify-content-between mt-3">
                 <span className='m-2'>{data.username}</span>
-                <span className="last-message-date  pt-1">fecha</span>
-                <span className='ml-auto mt-4 text-secondary'>{new Date(data.timestamp).toLocaleTimeString()}</span>
+                {/* <span className="last-message-date  pt-1">fecha</span> */}
+                <span className='ml-auto mt-4 text-secondary'>{new Date(data.createdAt).toLocaleTimeString()}</span>
               </div>
               <span className="preview-truncate-message">
               

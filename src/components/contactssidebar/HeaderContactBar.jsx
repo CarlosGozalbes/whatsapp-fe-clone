@@ -1,9 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './headercontactbar.css'
 import { Image } from 'react-bootstrap'
 import avatar from '../../assets/avatar.png'
 import { BsThreeDots, BsPlusLg, BsFullscreen, BsSearch } from "react-icons/bs";
+import { useDispatch, useSelector } from 'react-redux';
+import { getSearchedUsers } from '../../redux/reducers/action/action';
 export default function HeaderContactBar() {
+//   const [searchQuery, setSearchQuery] = useState('')
+// const dispatch = useDispatch
+//   const handleInputChange = (e) => {
+//     setSearchQuery(e.target.value)
+    
+//   }
+
+//   useEffect(()=>{
+//     dispatch(getSearchedUsers(searchQuery))
+//   },[])
+//   const AllUser = useSelector(state => state.allSearchedUsers)
+//   console.log(AllUser)
   return (
     <>
       <header className="header-with-profile d-flex justify-content-between">
@@ -24,11 +38,15 @@ export default function HeaderContactBar() {
       </header>
       <div className="input-search-contact-container">
         <BsSearch className="ml-4" />
-        <input
+        <input 
+        
           type="text"
           placeholder="search a chat or start a new one"
           className="search-contact-input"
+          // value={searchQuery}
+          // onChange={(e)=>handleInputChange(e)}
         />
+     
       </div>
     </>
   );
