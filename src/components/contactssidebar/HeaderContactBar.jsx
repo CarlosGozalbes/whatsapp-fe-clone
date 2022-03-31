@@ -4,7 +4,7 @@ import { Image } from "react-bootstrap";
 import avatar from "../../assets/avatar.png";
 import { BsThreeDots, BsPlusLg, BsFullscreen, BsSearch } from "react-icons/bs";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+
 import Chip from "@mui/material/Chip";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
@@ -29,6 +29,9 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
+import { useDispatch } from "react-redux";
+import { getUserInfo } from "../../redux/actions";
+ 
 
 export default function HeaderContactBar({ setShowSideBar, showSideBar }) {
   //   const dispatch = useDispatch();
@@ -44,7 +47,7 @@ export default function HeaderContactBar({ setShowSideBar, showSideBar }) {
   const handleClickOpenSearchUserDialog = () => {
     setOpenSearchUserDialog(true);
   };
-
+  const dispatch = useDispatch()
   const handleCloseSearchUserDialog = () => {
     setOpenSearchUserDialog(false);
   };
@@ -69,29 +72,14 @@ export default function HeaderContactBar({ setShowSideBar, showSideBar }) {
     setOpenDialog(false);
   };
 
-  // const logOut = () => {
-  //   localStorage.setItem('MyToken', null)
-  //   Navigate('/login')
-  // }
-
-  /* const fetchListOfUsers = async () => {
-    try {
-      let response = await fetch(`${process.env.REACT_APP_BE_LINK}/users`);
-      if (response.ok) {
-        console.log(response);
-        setListOfUsers(response);
-      } else {
-        console.log("error happened fetching the users");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }; */
+  //redux thing
+  const userReduxInformation = useSelector((state) => state.userInfo);
+  //
 
   const fetchSearchUsers = async () => {
     try {
       let response = await fetch(
-        `http://localhost:3001/users/search?username=${searchQueryUser}` //${process.env.REACT_APP_BE_LINK}
+        `${process.env.REACT_APP_BE_LINK}/users/search?username=${searchQueryUser}` //${process.env.REACT_APP_BE_LINK}
       );
       
       if (response.ok) {
@@ -110,9 +98,12 @@ export default function HeaderContactBar({ setShowSideBar, showSideBar }) {
     setSearchQueryUser(event.target.value);
   };
 
-  /* useEffect(() => {
-  fetchListOfUsers()
-}, []); */
+ useEffect(() => {
+  const token = localStorage.getItem("MyToken");
+  console.log(token)
+  console.log(userReduxInformation);
+  dispatch(getUserInfo(token));
+}, []); 
   /* useEffect(() => {
     //fetchSearchUsers();
     fetchSearchUsers()
@@ -134,14 +125,18 @@ export default function HeaderContactBar({ setShowSideBar, showSideBar }) {
         <div className="d-flex">
           <Image
             roundedCircle
-            src={avatar}
+            src={userReduxInformation.userInfo.avatar ? userReduxInformation.userInfo.avatar : avatar}
             height={50}
             className=" mx-3 my-2"
             style={{ cursor: "pointer" }}
           />{" "}
           <div className="d-flex flex-column mt-3">
-            <span>userInfo.name</span>
-            <span className="userinfo-info">Userinfo.State</span>
+            <span>{userReduxInformation.userInfo.username}</span>
+            <span className="userinfo-info">
+              {userReduxInformation.userInfo.info
+                ? userReduxInformation.userInfo.info
+                : ""}
+            </span>
           </div>
         </div>
         <div className="header-options align-self-center ml-auto mr-3">
@@ -212,7 +207,6 @@ export default function HeaderContactBar({ setShowSideBar, showSideBar }) {
                                   {user.info
                                     ? user.info
                                     : "Hey there I'm using whatsApp"}
-
                                 </Typography>
                               </React.Fragment>
                             }

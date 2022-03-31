@@ -6,13 +6,14 @@ export const ACTIONS = {
 }
 
 
-export const getUserInfo =(token)=>{
-    return async(dispatch)=> {
+export const getUserInfo = (token)=>{
+    console.log(token)
+     return async(dispatch)=> {
         try {
-            const response = await fetch("https://localhost:3001/users/me", {
+            const response = await fetch("http://localhost:3001/users/me", {
                 method:"GET",
                 headers:{
-                    Authorization:"Bearer " + token
+                    Authorization:`Bearer ${token}` 
                 }
             })
             if(response.ok){
@@ -33,7 +34,7 @@ export const getUserInfo =(token)=>{
 export const getActiveChat =(token)=>{
     return async(dispatch)=> {
         try {
-            const response = await fetch("https://localhost:3001/chat/:chatId", {
+            const response = await fetch("http://localhost:3001/chat/:chatId", {
                 method:"GET",
                 headers:{
                     Authorization:"Bearer " + token

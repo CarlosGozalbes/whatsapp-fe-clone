@@ -5,30 +5,42 @@ import './headercontactbar.css'
 import avatar123 from "../../assets/avatar.png";
 import { Image } from 'react-bootstrap';
 import {BsPenFill} from 'react-icons/bs'
+import { useSelector } from 'react-redux';
 
 export default function ContactsSideBar() {
+  //redux thing
+  const userReduxInformation = useSelector((state) => state.userInfo);
+  //
   
   const [showSideBar, setShowSideBar] = useState(false);
-  const [inputUserName, setInputUserName] = useState("");
-  const [inputInfo, setInputInfo] = useState("");
-  const [imageToDisplay,setImageToDisplay] = useState()
+  const [inputUserName, setInputUserName] = useState(
+    userReduxInformation.userInfo.username
+  );
+  const [inputInfo, setInputInfo] = useState(
+    userReduxInformation.userInfo.info
+  );
+  const [imageToDisplay, setImageToDisplay] = useState();
   const [selectedPic, setSelectedPic] = useState();
   const MyToken = localStorage.getItem("MyToken");
 
+  
+
   const handleEditProfile = async (e) => {
     e.preventDefault();
-    
+
     const newUserInfo = {
       username: inputUserName,
       info: inputInfo,
-      
     };
     try {
-      let res = await fetch(`${process.env.REACT_APP_BE_LINK}/me`, {
+      let res = await fetch(`${process.env.REACT_APP_BE_LINK}/users/me`, {
         //https://epichat1.herokuapp.com
         method: "PUT",
         body: JSON.stringify(newUserInfo),
-        headers: { "Content-type": "application/json", Authorization: `Bearer ${MyToken}` },
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${MyToken}`,
+        },
       });
       if (res.status !== 200) {
         // handleOpen();
@@ -36,20 +48,17 @@ export default function ContactsSideBar() {
         // setOpen(true);
       }
       if (res.ok) {
-        
-        
         //localStorage.setItem("MyToken", accessToken);
-        
+
         alert("Successfully edit profile!");
       }
     } catch (error) {
       console.log(error);
     }
   };
-  
 
   // const [selectedImage, setSelectedImage] = useState(null)
- 
+
   // const upload = async (e) => {
   //   e.preventDefault()
   //   const formData = new FormData()
@@ -70,8 +79,6 @@ export default function ContactsSideBar() {
   const handleChangePic = (e) => {
     setImageToDisplay(URL.createObjectURL(e.target.files[0]));
     setSelectedPic(e.target.files[0]);
-    
-  
   };
   const handleSavePic = async (e) => {
     e.preventDefault();
@@ -87,7 +94,7 @@ export default function ContactsSideBar() {
           Authorization: `Bearer ${MyToken}`,
         }
       );
-      
+
       if (response.ok) {
         alert("Image saved successfully");
         //actualise the redux state
@@ -98,9 +105,6 @@ export default function ContactsSideBar() {
       console.log(error);
     }
   };
-
-
-
 
   if (showSideBar) {
     return (
@@ -118,7 +122,13 @@ export default function ContactsSideBar() {
           <div className="d-flex justify-content-center py-4">
             <Image
               roundedCircle
-              src={selectedPic ? imageToDisplay : avatar123}
+              src={
+                selectedPic
+                  ? imageToDisplay
+                  : userReduxInformation.userInfo.avatar
+                  ? userReduxInformation.userInfo.avatar
+                  : avatar123
+              }
               height={250}
               width={250}
               className=" mx-3 my-2"
@@ -183,15 +193,15 @@ export default function ContactsSideBar() {
       </>
     );
   } else {
-  return (
-    <div className='d-flex flex-column'>
-      
+    return (
+      <div className="d-flex flex-column">
         <HeaderContactBar
           setShowSideBar={setShowSideBar}
           showSideBar={showSideBar}
         />
-      
-      <ConversationsList />
-    </div>
-  );}
+
+        <ConversationsList />
+      </div>
+    );
+  }
 }

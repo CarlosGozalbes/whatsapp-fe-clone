@@ -116,7 +116,7 @@ function RegisterPage() {
               <div className="mx-4">
                 <h6>Or logging with</h6>
                 <a
-                  href="http://localhost:3001/users/googleLogin"
+                  href={`${process.env.REACT_APP_BE_LINK}/users/googleLogin`}
                   className="text-decoration-none"
                 >
                   <div className="mt-1 continue-with-btn links-color">
@@ -125,7 +125,7 @@ function RegisterPage() {
                   </div>
                 </a>
                 <a
-                  href="http://localhost:3001/users/githubLogin"
+                  href={`${process.env.REACT_APP_BE_LINK}/users/githubLogin`}
                   className="text-decoration-none"
                 >
                   <div className="mt-3 continue-with-btn links-color">
