@@ -9,18 +9,11 @@ export const rootReducer = (state = initialState, action) => {
       // this means that you want to connect to the BE using directly some ID
       // the ID will be in the token retrieveable from the localStorage
       const token = localStorage.getItem("MyToken")
-      console.log(process.env.REACT_APP_BE_LINK, token)
       const socket = io(process.env.REACT_APP_BE_LINK, {
           transports: ["websocket"],
           auth: { token },
       });
 
-      socket.on("connect", () => {
-        console.log("connected")
-      })
-
-      console.log(socket)
-      
       setupConnection(socket)
 
       return {
@@ -28,7 +21,7 @@ export const rootReducer = (state = initialState, action) => {
         socket: socket,
       };
     case "EMIT_TEST":
-      state.socket.emit("locationsEvent", {asd:"hello"})
+      state.socket.emit("locationsEvent", { asd:"hello" })
       return state
       // state.socket.on("incoming-msg", { message: "Hello"})
       // state.socket.on("incoming-msg", ({ message }) => {
