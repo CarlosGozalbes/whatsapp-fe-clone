@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Typography } from "@mui/material/styles/createTypography";
 import ContactsSideBar from "../components/contactssidebar/ContactsSideBar";
 import ConversationDetails from "../components/conversationdetails/ConversationDetails";
 import "./mainpage.css";
@@ -35,7 +36,6 @@ function MainPage() {
       </Button>
       <Row style={{ maxWidth: "100vw", marginRight: "0px", marginLeft: "0px" }}>
         <Col md={4} className="contacts-side-bar">
-          {/* <Sidebar {...{ sideBar, setSideBar }} /> */}
           <ContactsSideBar />
         </Col>
         {
