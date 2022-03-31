@@ -10,8 +10,9 @@ export default function SingleConversation() {
         <Image
           roundedCircle
           src={avatar}
-          height={60}
-          className="conversation-list-avatar mx-3 my-2"
+          width={'9%'}
+          height={'8%'}
+          className="conversation-list-avatar "
         />
         <div className="d-flex flex-column details-list">
           <div className="d-flex justify-content-between mt-3">
@@ -22,7 +23,7 @@ export default function SingleConversation() {
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum laudantium itaque ipsa quisquam enim, voluptate distinctio asperiores, aliquam accusantium eum, fugit corrupti dolore nisi maxime qui excepturi repellat dignissimos harum.
           </span>
         </div>
-        <div className="message-without-read align-self-end ml-2 mb-3"> 1 </div>
+        {/* <div className="message-without-read align-self-end ml-2 mb-3"> 1 </div> */}
       </Row>
     </div>
   );

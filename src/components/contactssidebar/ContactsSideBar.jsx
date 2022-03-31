@@ -184,7 +184,7 @@ export default function ContactsSideBar() {
     );
   } else {
   return (
-    <div>
+    <div className='d-flex flex-column'>
       
         <HeaderContactBar
           setShowSideBar={setShowSideBar}

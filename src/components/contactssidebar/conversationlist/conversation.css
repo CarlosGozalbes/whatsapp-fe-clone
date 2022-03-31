@@ -1,9 +1,9 @@
 .conversation-list{
     position: absolute;
     overflow-y: auto;
-    max-height: calc(100% - 7.7rem);
+    max-height: calc(100% - 9.75rem);
     border-top: 1px solid rgb(214, 214, 214);
-    top: 7.7rem;
+    top: 9.75rem;
     min-width: 100%;
     ;
 }
@@ -20,7 +20,7 @@
 }
 .details-list{
     display: block;
-    width: 75%;
+    width: 85%;
 }
 
 .preview-truncate-message{
