@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react'
-import './headercontactbar.css'
-import { Image } from 'react-bootstrap'
-import avatar from '../../assets/avatar.png'
+import React, { useEffect, useState } from "react";
+import "./headercontactbar.css";
+import { Image } from "react-bootstrap";
+import avatar from "../../assets/avatar.png";
 import { BsThreeDots, BsPlusLg, BsFullscreen, BsSearch } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -12,7 +12,7 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { borderRadius } from '@mui/system';
+import { borderRadius } from "@mui/system";
 import IconButton from "@mui/material/IconButton";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Dialog from "@mui/material/Dialog";
@@ -20,88 +20,87 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Navigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-
+import { Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function HeaderContactBar({ setShowSideBar, showSideBar }) {
-//   const dispatch = useDispatch();
-//  const userInfo = useSelector((state) => state.userInfo);
-const [listOfUsers,setListOfUsers] = useState([])
- const [value, setValue] = useState(null);
- const [inputValue, setInputValue] = useState("");
-const [anchorEl, setAnchorEl] = React.useState(null);
-const [openDialog, setOpenDialog] = React.useState(false);
-const open = Boolean(anchorEl);
-const handleClick = (event) => {
-  setAnchorEl(event.currentTarget);
-};
-const handleClose = () => {
-  setAnchorEl(null);
-};
+  //   const dispatch = useDispatch();
+  //  const userInfo = useSelector((state) => state.userInfo);
+  const [listOfUsers, setListOfUsers] = useState([]);
+  const [value, setValue] = useState(null);
+  const [inputValue, setInputValue] = useState("");
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [openDialog, setOpenDialog] = React.useState(false);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
+  const handleClickOpenDialog = () => {
+    handleClose();
+    setOpenDialog(true);
+  };
 
-const handleClickOpenDialog = () => {
-  handleClose();
-  setOpenDialog(true);
-};
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
 
-const handleCloseDialog = () => {
-  setOpenDialog(false);
-};
+  // const logOut = () => {
+  //   localStorage.setItem('MyToken', null)
+  //   Navigate('/login')
+  // }
 
-// const logOut = () => {
-//   localStorage.setItem('MyToken', null)
-//   Navigate('/login')
-// }
- 
-
-const fetchListOfUsers = async () => {
-  try {
-    let response = await fetch(`${process.env.REACT_APP_BE_LINK}/users`)
-    if (response.ok) {
-      console.log(response)
-      setListOfUsers(response)
-    } else {
-        console.log("error happened fetching the users")
+  const fetchListOfUsers = async () => {
+    try {
+      let response = await fetch(`${process.env.REACT_APP_BE_LINK}/users`);
+      if (response.ok) {
+        console.log(response);
+        setListOfUsers(response);
+      } else {
+        console.log("error happened fetching the users");
       }
-    
-  } catch (error) {
-    console.log(error);
-  }
-}
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-/* useEffect(() => {
+  /* useEffect(() => {
   fetchListOfUsers()
 }, []); */
+  /* useEffect(() => {
+  fetchSearch()
+}, [inputvalue]); */
 
-const startAConversation = () => {
-  console.log(value)
-  setValue(null);
-}
+  const startAConversation = () => {
+    console.log(value);
+    setValue(null);
+  };
 
-return (
-  <>
-    <header className="header-with-profile d-flex justify-content-between">
-      <div className="d-flex">
-        <Image
-          roundedCircle
-          src={avatar}
-          height={50}
-          className=" mx-3 my-2"
-          onClick={() => setShowSideBar(!showSideBar)}
-          style={{ cursor: "pointer" }}
-        />{" "}
-        <div className="d-flex flex-column mt-3">
-          <span>userInfo.name</span>
-          <span className="userinfo-info">Userinfo.State</span>
+  return (
+    <>
+      <header className="header-with-profile d-flex justify-content-between">
+        <div className="d-flex">
+          <Image
+            roundedCircle
+            src={avatar}
+            height={50}
+            className=" mx-3 my-2"
+            onClick={() => setShowSideBar(!showSideBar)}
+            style={{ cursor: "pointer" }}
+          />{" "}
+          <div className="d-flex flex-column mt-3">
+            <span>userInfo.name</span>
+            <span className="userinfo-info">Userinfo.State</span>
+          </div>
         </div>
-      </div>
-      <div className="header-options align-self-center mr-3">
-        <BsFullscreen className="mr-4 header-icons" />
-        <BsPlusLg className="mr-2 header-icons" />
+        <div className="header-options align-self-center mr-3">
+          <BsFullscreen className="mr-4 header-icons" />
+          <BsPlusLg className="mr-2 header-icons" />
 
-        {/* <Button
+          {/* <Button
           id="basic-button"
           aria-controls={open ? "basic-menu" : undefined}
           aria-haspopup="true"
@@ -111,85 +110,91 @@ return (
         >
           <BsThreeDots className="" />
         </Button> */}
-        <IconButton
-          aria-label="more"
-          id="long-button"
-          aria-controls={open ? "long-menu" : undefined}
-          aria-expanded={open ? "true" : undefined}
-          aria-haspopup="true"
-          onClick={handleClick}
-        >
-          <MoreVertIcon />
-        </IconButton>
-        <Menu
-          id="basic-menu"
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleClose}
-          MenuListProps={{
-            "aria-labelledby": "basic-button",
-          }}
-        >
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
-          <MenuItem onClick={handleClose}>My account</MenuItem>
-          <MenuItem onClick={handleClickOpenDialog}>Logout</MenuItem>
-        </Menu>
-        <Dialog
-          open={openDialog}
-          onClose={handleCloseDialog}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <DialogTitle id="alert-dialog-title">
-            {"Hope to see you soon!"}
-          </DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              Are you sure you want to disconnect from whatsapp?
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCloseDialog}>No</Button>
-            <Link to="/login" onClick={localStorage.setItem("MyToken", null)}>
-              <Button onClick={localStorage.setItem("MyToken", null)} autoFocus>
-                Yes
-              </Button>
-            </Link>
-          </DialogActions>
-        </Dialog>
-      </div>
-    </header>
-    {/* <div className="input-search-contact-container"> */}
-    {/* <BsSearch className="ml-4" />
+          <IconButton
+            aria-label="more"
+            id="long-button"
+            aria-controls={open ? "long-menu" : undefined}
+            aria-expanded={open ? "true" : undefined}
+            aria-haspopup="true"
+            onClick={handleClick}
+          >
+            <MoreVertIcon />
+          </IconButton>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              "aria-labelledby": "basic-button",
+            }}
+          >
+            <MenuItem onClick={handleClose}>Profile</MenuItem>
+            <MenuItem onClick={handleClose}>My account</MenuItem>
+            <MenuItem onClick={handleClickOpenDialog}>Logout</MenuItem>
+          </Menu>
+          <Dialog
+            open={openDialog}
+            onClose={handleCloseDialog}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">
+              {"Hope to see you soon!"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Are you sure you want to disconnect from whatsapp?
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleCloseDialog}>No</Button>
+              <Link
+                to="/login"
+                onClick={() => localStorage.setItem("MyToken", null)}
+              >
+                <Button
+                  onClick={() => localStorage.setItem("MyToken", null)}
+                  autoFocus
+                >
+                  Yes
+                </Button>
+              </Link>
+            </DialogActions>
+          </Dialog>
+        </div>
+      </header>
+      {/* <div className="input-search-contact-container"> */}
+      {/* <BsSearch className="ml-4" />
         <input
           type="text"
           placeholder="search a chat or start a new one"
           className="search-contact-input"
         /> */}
-    <div className="input-search-contact-container-mui">
-      <Autocomplete
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
-        inputValue={inputValue}
-        onInputChange={(event, newInputValue) => {
-          setInputValue(newInputValue);
-        }}
-        id="controllable-states-demo"
-        options={top100Films}
-        getOptionLabel={(option) => option.title}
-        onKeyDown={(event) => {
-          if (event.key === "Enter") {
-            startAConversation();
-          }
-        }}
-        renderInput={(params) => (
-          <TextField {...params} label="Start a new conversation" />
-        )}
-      />
+      <div className="input-search-contact-container-mui">
+        <Autocomplete
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
+          inputValue={inputValue}
+          onInputChange={(event, newInputValue) => {
+            setInputValue(newInputValue);
+          }}
+          id="controllable-states-demo"
+          options={top100Films}
+          getOptionLabel={(option) => option.title}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              startAConversation();
+            }
+          }}
+          renderInput={(params) => (
+            <TextField {...params} label="Start a new conversation" />
+          )}
+        />
 
-      {/* <Autocomplete
+        {/* <Autocomplete
         id="size-small-standard"
         size="small"
         options={top100Films}
@@ -217,12 +222,11 @@ return (
           />
         )}
       /> */}
-    </div>
-    {/* </div> */}
-  </>
-);
+      </div>
+      {/* </div> */}
+    </>
+  );
 }
-
 
 const top100Films = [
   { title: "The Shawshank Redemption", year: 1994 },
