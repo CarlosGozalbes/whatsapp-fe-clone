@@ -98,12 +98,12 @@ export default function HeaderContactBar({ setShowSideBar, showSideBar }) {
     setSearchQueryUser(event.target.value);
   };
 
- useEffect(() => {
-  const token = localStorage.getItem("MyToken");
-  console.log(token)
-  console.log(userReduxInformation);
-  dispatch(getUserInfo(token));
-}, []); 
+//  useEffect(() => {
+//   const token = localStorage.getItem("MyToken");
+//   console.log(token)
+//   console.log(userReduxInformation);
+//   //dispatch(getUserInfo(token));
+// }, []); 
   /* useEffect(() => {
     //fetchSearchUsers();
     fetchSearchUsers()

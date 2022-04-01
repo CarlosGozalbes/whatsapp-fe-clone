@@ -44,19 +44,24 @@ export const rootReducer = (state = initialState, action) => {
     // return {...state......}
 
 
-
+      break
     case ACTIONS.SET_USER_INFO:
         return{
             ...state,
             userInfo: action.payload
         }
 
-    case ACTIONS.SET_ACTIVE_CHAT:
+    case ACTIONS.SET_CHATS:
         return{
-            ...state.chats,
-            list: action.payload
+            ...state,
+            chats: {
+              ...state.chats,
+              list: action.payload
+            }
         }
-      
+        
+ 
+    
     default:
       return state;
   }

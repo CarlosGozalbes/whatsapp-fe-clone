@@ -11,14 +11,18 @@ import { useDispatch, useSelector } from "react-redux";
 function MainPage() {
   const [selectedConversation, setSelectedConversation] = useState(true);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const activeChat = useSelector(
     (state) => state.chats.active
   );
+
+  // const user = from the store
    useEffect(() => {
     let myToken = localStorage.getItem("MyToken");
     if (!myToken) {
       navigate("/login");
-    }
+    } // 
+    else {dispatch(getUserInfo(token));}
   }, [navigate]);
 
   // const token = localStorage.getItem("MyToken")
@@ -26,7 +30,12 @@ function MainPage() {
   const dispatch = useDispatch();
   const socket = useSelector((state) => state.socket);
   console.log("socket",socket);
-  
+  useEffect(() => {
+    const token = localStorage.getItem("MyToken");
+    console.log(token);
+    
+    
+  }, []); 
   return (
     <>
       <Button

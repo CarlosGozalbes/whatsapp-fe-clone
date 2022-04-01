@@ -1,29 +1,27 @@
-import React, {useState} from 'react'
-import ConversationsList from './conversationlist/ConversationsList'
-import HeaderContactBar from './HeaderContactBar'
-import './headercontactbar.css'
+import React, { useState } from "react";
+import ConversationsList from "./conversationlist/ConversationsList";
+import HeaderContactBar from "./HeaderContactBar";
+import "./headercontactbar.css";
 import avatar123 from "../../assets/avatar.png";
-import { Image } from 'react-bootstrap';
-import {BsPenFill} from 'react-icons/bs'
-import { useSelector } from 'react-redux';
+import { Image } from "react-bootstrap";
+import { BsPenFill } from "react-icons/bs";
+import { useSelector } from "react-redux";
 
 export default function ContactsSideBar() {
   //redux thing
   const userReduxInformation = useSelector((state) => state.userInfo);
   //
-  
+
   const [showSideBar, setShowSideBar] = useState(false);
   const [inputUserName, setInputUserName] = useState(
-    userReduxInformation.userInfo.username
+    userReduxInformation.userInfo?.username
   );
   const [inputInfo, setInputInfo] = useState(
-    userReduxInformation.userInfo.info
+    userReduxInformation.userInfo?.info
   );
   const [imageToDisplay, setImageToDisplay] = useState();
   const [selectedPic, setSelectedPic] = useState();
   const MyToken = localStorage.getItem("MyToken");
-
-  
 
   const handleEditProfile = async (e) => {
     e.preventDefault();

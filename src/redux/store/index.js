@@ -13,7 +13,7 @@ const aComposeFunctionThatAlwaysWorks =
 
 
 export const initialState = {
-    userInfo: [],
+    userInfo: null,
     chats: {
       active: '', //"ID_CHAT_WITH_USER" the _id of one of the chats among store.chats.list
       list: [
