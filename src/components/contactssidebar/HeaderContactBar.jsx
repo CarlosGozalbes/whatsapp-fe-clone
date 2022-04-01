@@ -115,8 +115,32 @@ export default function HeaderContactBar({ setShowSideBar, showSideBar }) {
     setValue(null);
   };
 
-  const startAConversationForReal = (id) => {
+  const startAConversationForReal = async (id) => {
     console.log(id)
+    const body = {
+      recipient: id
+    }
+    try {
+      let res = await fetch(`${process.env.REACT_APP_BE_LINK}/chat`, {
+        //https://epichat1.herokuapp.com
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: { "Content-type": "application/json" },
+      });
+      if (res.status !== 200) {
+        
+        alert("couldnt start conversation");
+        
+      }
+      if (res.ok) {
+    
+        console.log("Successfully started conversation");
+      }
+    } catch (error) {
+      console.log(error)
+    }
+    handleCloseSearchUserDialog()
+    //dispatch(fetchOpenChats());
   }
 
   return (
@@ -186,7 +210,8 @@ export default function HeaderContactBar({ setShowSideBar, showSideBar }) {
                           alignItems="flex-start"
                           className="list_item_search_users"
                           style={{ cursor: "pointer" }}
-                          onClick={startAConversationForReal}
+                          key={user._id}
+                          onClick={() => startAConversationForReal(user._id)}
                         >
                           <ListItemAvatar>
                             <Avatar
