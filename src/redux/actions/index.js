@@ -34,15 +34,15 @@ export const getUserInfo = (token)=>{
 }
 
 
-export const getActiveChat =(token)=>{
+export const getActiveChat =(token,chatId)=>{
     return async(dispatch)=> {
         try {
             const response = await fetch(
-              `${process.env.REACT_APP_BE_LINK}/chat/:chatId`,
+              `${process.env.REACT_APP_BE_LINK}/chat/${chatId}`,
               {
                 method: "GET",
                 headers: {
-                  Authorization: "Bearer " + token,
+                  Authorization: `Bearer ${token}`,
                 },
               }
             );
@@ -59,3 +59,32 @@ export const getActiveChat =(token)=>{
         }
     }
 }
+// export const fetchOpenChats =  () => {
+//   return async(dispatch)=> {
+//     try {
+//     const token = localStorage.getItem("MyToken");
+//     let res = await fetch(`${process.env.REACT_APP_BE_LINK}/chat`, {
+//       //https://epichat1.herokuapp.com
+//       method: "GET",
+//       headers: {
+//         "Content-type": "application/json",
+//         Authorization: `Bearer ${token}`,
+//       },
+//     });
+//     if (res.status !== 200) {
+//       // handleOpen();
+//       alert("couldnt retrieve the conversations");
+//       // setOpen(true);
+//     }
+//     if (res.ok) {
+//       let data = await res.json();
+//       console.log(data);
+//       dispatch({
+//         type: ACTIONS.SET_ACTIVE_CHAT,
+//         payload: data,
+//       });
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };}

@@ -11,13 +11,15 @@ import { useDispatch, useSelector } from "react-redux";
 function MainPage() {
   const [selectedConversation, setSelectedConversation] = useState();
   const navigate = useNavigate();
-
-  //  useEffect(() => {
-  //   let myToken = localStorage.getItem("MyToken");
-  //   if (!myToken) {
-  //     navigate("/login");
-  //   }
-  // }, [navigate]);
+  const activeChat = useSelector(
+    (state) => state.chats.active
+  );
+   useEffect(() => {
+    let myToken = localStorage.getItem("MyToken");
+    if (!myToken) {
+      navigate("/login");
+    }
+  }, [navigate]);
 
   // const token = localStorage.getItem("MyToken")
   // console.log("MyToken",token);
@@ -40,11 +42,7 @@ function MainPage() {
         </Col>
         {
           <Col md={8} className="coversation-details">
-            {selectedConversation ? (
-              <ConversationDetails />
-            ) : (
-              <EmptyConversation />
-            )}
+            {activeChat ? <ConversationDetails /> : <EmptyConversation />}
           </Col>
         }
       </Row>

@@ -43,6 +43,7 @@ export const rootReducer = (state = initialState, action) => {
             ...state.chats,
             list: action.payload
         }
+      
     default:
       return state;
   }
