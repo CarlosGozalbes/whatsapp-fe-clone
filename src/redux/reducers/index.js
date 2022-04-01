@@ -1,4 +1,4 @@
-import io from "socket.io-client";
+import {io} from "socket.io-client";
 import { ACTIONS } from "../actions";
 import { initialState } from "../store";
 import setupConnection from "./setupIoConnection";
@@ -11,8 +11,8 @@ export const rootReducer = (state = initialState, action) => {
       const token = localStorage.getItem("MyToken")
       const socket = io(process.env.REACT_APP_BE_LINK, {
           transports: ["websocket"],
-          auth: token,
-        });
+          auth: { token },
+      });
 
       setupConnection(socket)
 
@@ -20,12 +20,25 @@ export const rootReducer = (state = initialState, action) => {
         ...state,
         socket: socket,
       };
-    //case "EMIT_TEST":
-    //    state.socket.emit("testEvent", { message: "Hello"})
-    //    return state
-    case ACTIONS.NEW_MESSAGE:
-    // const { sender, message} = action.payload
-    // if (sender === state.userInfo._id) state.socket.emit("öutgoing_msg", message)
+    case "NEW_MESSAGE":
+      const message = {
+        chatId: state.chats._id ,
+        sender: state.userInfo._id,
+        recipientId: '',
+        content: {
+          text:'',
+          media:''
+        },
+      }
+      state.socket.emit("outgoing-msg",{ content: message})
+      state.socket.on("incoming-msg", ({ message }) => {
+        console.log(message)
+
+      return state
+      })
+    // case ACTIONS.NEW_MESSAGE:
+    // const { sender, content} = action.payload
+    // if (sender === state.userInfo._id) state.socket.emit("outgoing_msg", message)
 
     // .....update the chat list
     // return {...state......}

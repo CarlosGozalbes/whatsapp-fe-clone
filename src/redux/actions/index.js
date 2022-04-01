@@ -6,9 +6,10 @@ export const ACTIONS = {
 }
 
 
-export const getUserInfo = (token)=>{
-    console.log(token)
-     return async(dispatch)=> {
+
+
+export const getUserInfo =(token)=>{
+    return async(dispatch)=> {
         try {
             const response = await fetch(
               `${process.env.REACT_APP_BE_LINK}/users/me`,

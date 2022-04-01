@@ -4,7 +4,7 @@ export default function setupConnection(socket) {
   socket.on("connection", () => {
     console.log("connection established!");
   });
-
+  
   socket.on("loggedin", () => {
     console.log("You're correctly logged in now");
 
