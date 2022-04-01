@@ -27,7 +27,7 @@ function MainPage() {
 
   // const token = localStorage.getItem("MyToken")
   // console.log("MyToken",token);
-  const dispatch = useDispatch();
+
   const socket = useSelector((state) => state.socket);
   console.log("socket",socket);
   useEffect(() => {
