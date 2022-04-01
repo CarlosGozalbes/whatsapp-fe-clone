@@ -20,15 +20,22 @@ export const rootReducer = (state = initialState, action) => {
         ...state,
         socket: socket,
       };
-    case "EMIT_TEST":
-      state.socket.emit("locationsEvent", { asd:"hello" })
-      return state
-      // state.socket.on("incoming-msg", { message: "Hello"})
-      // state.socket.on("incoming-msg", ({ message }) => {
-      //   console.log(message)
+    case "NEW_MESSAGE":
+      const message = {
+        chatId: state.chats._id ,
+        sender: state.userInfo._id,
+        recipientId: '',
+        content: {
+          text:'',
+          media:''
+        },
+      }
+      state.socket.emit("outgoing-msg",{ content: message})
+      state.socket.on("incoming-msg", ({ message }) => {
+        console.log(message)
 
-      // return state
-      // })
+      return state
+      })
     // case ACTIONS.NEW_MESSAGE:
     // const { sender, content} = action.payload
     // if (sender === state.userInfo._id) state.socket.emit("outgoing_msg", message)

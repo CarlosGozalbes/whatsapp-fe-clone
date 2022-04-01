@@ -9,7 +9,7 @@ import { Row, Col, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
 function MainPage() {
-  const [selectedConversation, setSelectedConversation] = useState();
+  const [selectedConversation, setSelectedConversation] = useState(true);
   const navigate = useNavigate();
 
   //  useEffect(() => {
