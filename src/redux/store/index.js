@@ -39,13 +39,9 @@ const persistConfig = {
   ],
 };
 
-const bigReducer = combineReducers({
-  chats: rootReducer,
-  userInfo: rootReducer,
-  socket: rootReducer,
-});
 
-const persistedReducer = persistReducer(persistConfig, bigReducer);
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const configureStore = createStore(
   

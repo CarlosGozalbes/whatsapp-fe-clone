@@ -15,27 +15,19 @@ function MainPage() {
   const navigate = useNavigate();
   
   const activeChat = useSelector((state) => state.chats.active);
+  const userInfo = useSelector((state) => state.chats);
+  console.log("UserInfo",userInfo);
+  console.log("Active",activeChat);
 
   // const user = from the store
   let token = localStorage.getItem("MyToken")
   useEffect(() => {
-     
-    let token = localStorage.getItem("MyToken");
-      console.log(token);
       if (!token) {
         navigate("/login")} else {dispatch(getUserInfo(token));} 
     },
     [navigate] 
   );
   ;  
-  /* useEffect(() => {
-      
-      
-      console.log(dispatch(getUserInfo(token)))
-    }, []) */
-    
-  // const token = localStorage.getItem("MyToken")
-  // console.log("MyToken",token);
 
   const socket = useSelector((state) => state.socket);
   console.log("socket", socket);

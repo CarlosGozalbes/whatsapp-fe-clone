@@ -22,11 +22,11 @@ export const rootReducer = (state = initialState, action) => {
       };
     case "NEW_MESSAGE":
       const message = {
-        chatId: state.chats._id ,
+        chatId:  state.chats.active._id ,
         sender: state.userInfo._id,
-        recipientId: '',
+        recipientId: state.chats.active.members[1]._id,
         content: {
-          text:'',
+          text:action.payload,
           media:''
         },
       }
@@ -46,6 +46,7 @@ export const rootReducer = (state = initialState, action) => {
 
       break
     case ACTIONS.SET_USER_INFO:
+      console.log(action.payload)
         return{
             ...state,
             userInfo: action.payload

@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 
 export default function ContactsSideBar() {
   //redux thing
-  const userReduxInformation = useSelector((state) => state.userInfo ? state.userInfo : "Hey there i'm using whatsapp");
+  const userReduxInformation = useSelector((state) => state.userInfo.username ? state.userInfo : "Hey there i'm using whatsapp");
   //
 
   const [showSideBar, setShowSideBar] = useState(false);

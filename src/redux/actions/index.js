@@ -49,11 +49,11 @@ export const getActiveChat =(token,chatId)=>{
               }
             );
             if(response.ok){
-                const {members} = await response.json()
-                console.log(members);
+                const data = await response.json()
+                console.log("Active chat", data);
                 dispatch({
                     type:ACTIONS.SET_ACTIVE_CHAT,
-                    payload:members
+                    payload:data
                 })
             }
         } catch (error) {
