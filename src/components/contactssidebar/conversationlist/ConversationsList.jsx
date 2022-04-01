@@ -3,13 +3,18 @@ import './conversation.css'
 import SingleConversation from './SingleConversation'
 import { Row,Image } from 'react-bootstrap'
 import avatar from "../../../assets/avatar.png";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getActiveChat } from '../../../redux/actions';
 export default function ConversationsList() {
-  const [listOfConversations, setListOfConversations] = useState([])
+  
   const dispatch = useDispatch();
   const token = localStorage.getItem("MyToken");
+  const listOfConversations = useSelector((state) => state.chats.list);
+  
   const fetchOpenChats = async () => {try {
+   
+  
+   
     const token = localStorage.getItem('MyToken')
     let res = await fetch(`${process.env.REACT_APP_BE_LINK}/chat`, {
       //https://epichat1.herokuapp.com
@@ -38,17 +43,17 @@ export default function ConversationsList() {
   
   React.useEffect(() => {
     
-    // fetchOpenChats()
+    fetchOpenChats()
   }, [])
   
-  
+  console.log(listOfConversations)
   
   return (
     <div className="d-flex flex-column conversation-list">
       {listOfConversations &&
         listOfConversations.map((conversation) => (
           <Row
-            onClick={dispatch(getActiveChat(token, conversation._id))}
+            onClick={() => dispatch(getActiveChat(token, conversation._id))}
             className="d-flex single-conversation-container pl-2"
           >
             <Image
@@ -60,20 +65,18 @@ export default function ConversationsList() {
             />
             <div className="d-flex flex-column details-list">
               <div className="d-flex justify-content-between mt-3">
-                <span>Nombre Apellido</span>
+                <span> {/* {conversation[0].members[1].username} */} </span>
                 <span className="last-message-date  pt-1">friday</span>
               </div>
               <span className="preview-truncate-message">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Dolorum laudantium itaque ipsa quisquam enim, voluptate
-                distinctio asperiores, aliquam accusantium eum, fugit corrupti
-                dolore nisi maxime qui excepturi repellat dignissimos harum.
+                 {/* {conversation[0].members[1].info} */} 
               </span>
             </div>
             {/* <div className="message-without-read align-self-end ml-2 mb-3"> 1 </div> */}
           </Row>
         ))}
 
+      {/* <SingleConversation />
       <SingleConversation />
       <SingleConversation />
       <SingleConversation />
@@ -91,8 +94,7 @@ export default function ConversationsList() {
       <SingleConversation />
       <SingleConversation />
       <SingleConversation />
-      <SingleConversation />
-      <SingleConversation />
+      <SingleConversation /> */}
     </div>
   );
 }

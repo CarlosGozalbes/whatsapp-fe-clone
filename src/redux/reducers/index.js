@@ -50,7 +50,14 @@ export const rootReducer = (state = initialState, action) => {
             ...state,
             userInfo: action.payload
         }
-
+    case ACTIONS.SET_ACTIVE_CHAT: 
+        return {
+          ...state,
+          chats: {
+            ...state.chats,
+            active: action.payload,
+          },
+        };
     case ACTIONS.SET_CHATS:
         return{
             ...state,

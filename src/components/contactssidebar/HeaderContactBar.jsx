@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./headercontactbar.css";
 import { Image } from "react-bootstrap";
-import avatar from "../../assets/avatar.png";
+import avatar1234 from "../../assets/avatar.png";
 import { BsThreeDots, BsPlusLg, BsFullscreen, BsSearch } from "react-icons/bs";
 import { useSelector } from "react-redux";
 
@@ -150,20 +150,20 @@ export default function HeaderContactBar({ setShowSideBar, showSideBar }) {
           <Image
             roundedCircle
             src={
-              userReduxInformation.userInfo.avatar
-                ? userReduxInformation.userInfo.avatar
-                : avatar
+              userReduxInformation?.userInfo?.avatar
+                ? userReduxInformation?.userInfo?.avatar
+                : avatar1234
             }
             height={50}
             className=" mx-3 my-2"
             style={{ cursor: "pointer" }}
           />{" "}
           <div className="d-flex flex-column mt-3">
-            <span>{userReduxInformation.userInfo.username}</span>
+            <span>{userReduxInformation.userInfo?.username ? userReduxInformation.userInfo?.username : 'NAME'}</span>
             <span className="userinfo-info">
-              {userReduxInformation.userInfo.info
-                ? userReduxInformation.userInfo.info
-                : ""}
+              {userReduxInformation.userInfo?.info
+                ? userReduxInformation.userInfo?.info
+                : "Hey there i'm using whatsApp"}
             </span>
           </div>
         </div>

@@ -6,11 +6,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { AiFillApple } from "react-icons/ai";
 import { FaFacebookSquare, FaGoogle, FaGithub } from "react-icons/fa";
 
+
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
+  
   const handleRegister = async (e) => {
     e.preventDefault();
     

@@ -7,7 +7,7 @@ export const ACTIONS = {
 
 
 
-
+console.log(process.env.REACT_APP_BE_LINK)
 export const getUserInfo =(token)=>{
     return async(dispatch)=> {
         try {
@@ -36,7 +36,8 @@ export const getUserInfo =(token)=>{
 
 
 export const getActiveChat =(token,chatId)=>{
-    return async(dispatch)=> {
+  console.log(chatId);  
+  return async(dispatch)=> {
         try {
             const response = await fetch(
               `${process.env.REACT_APP_BE_LINK}/chat/${chatId}`,
@@ -48,11 +49,11 @@ export const getActiveChat =(token,chatId)=>{
               }
             );
             if(response.ok){
-                const data = await response.json()
-                console.log(data);
+                const {members} = await response.json()
+                console.log(members);
                 dispatch({
                     type:ACTIONS.SET_ACTIVE_CHAT,
-                    payload:data
+                    payload:members
                 })
             }
         } catch (error) {
