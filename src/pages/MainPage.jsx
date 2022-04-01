@@ -17,29 +17,26 @@ function MainPage() {
   const activeChat = useSelector((state) => state.chats.active);
   const userInfo = useSelector((state) => state.chats);
   console.log("UserInfo",userInfo);
-  console.log("Active",activeChat);
+  console.log("Active____",activeChat);
 
   // const user = from the store
   let token = localStorage.getItem("MyToken")
   useEffect(() => {
       if (!token) {
-        navigate("/login")} else {dispatch(getUserInfo(token));} 
+        navigate("/login")} else {dispatch(getUserInfo(token));
+          dispatch({ type: "INIT_SOCKET" })
+        
+        } 
     },
     [navigate] 
   );
   ;  
 
   const socket = useSelector((state) => state.socket);
-  console.log("socket", socket);
   
   return (
     <>
-      <Button
-        variant="success"
-        onClick={() => dispatch({ type: "INIT_SOCKET" })}
-      >
-        Init socket
-      </Button>
+    
       <Button variant="success" onClick={() => dispatch({ type: "EMIT_TEST" })}>
         Send message
       </Button>

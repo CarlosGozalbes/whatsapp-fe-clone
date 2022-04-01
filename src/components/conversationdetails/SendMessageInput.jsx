@@ -10,12 +10,7 @@ export default function SendMessageInput() {
     const [inputValue, setInputValue] = useState('')
     const dispatch = useDispatch()
     
-    
-    const handleSubmit = (inputValue) => {
-      console.log(inputValue);
-      //dispatch new message and 
-      //socket.emit
-    };
+ 
     return (
       <div className="send-message-input-container">
         {/* <Picker
@@ -35,7 +30,7 @@ export default function SendMessageInput() {
           onChange={e => setInputValue(e.target.value)}
           placeholder="write a message here"
           
-          onEnter={handleSubmit}
+          
         />
         <BsMic className="send-message-icons" />
       </div>

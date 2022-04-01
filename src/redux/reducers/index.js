@@ -30,7 +30,7 @@ export const rootReducer = (state = initialState, action) => {
           media:''
         },
       }
-      state.socket.emit("outgoing-msg",{ content: message})
+      if (message.sender === state.userInfo._id) state.socket.emit("outgoing_msg", message)
       state.socket.on("incoming-msg", ({ message }) => {
         console.log(message)
 
@@ -46,7 +46,6 @@ export const rootReducer = (state = initialState, action) => {
 
       break
     case ACTIONS.SET_USER_INFO:
-      console.log(action.payload)
         return{
             ...state,
             userInfo: action.payload

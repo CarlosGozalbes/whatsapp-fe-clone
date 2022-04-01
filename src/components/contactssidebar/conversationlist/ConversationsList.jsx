@@ -11,7 +11,6 @@ export default function ConversationsList() {
   const token = localStorage.getItem("MyToken");
   const [listOfConversations, setListOfConversations] = useState([])
   // const listOfConversations = useSelector((state) => state.chats.list);
-  console.log("ali",listOfConversations);
   
   const fetchOpenChats = async () => {try {
    
@@ -33,7 +32,6 @@ export default function ConversationsList() {
     }
     if (res.ok) {
       let data = await res.json()
-      console.log(data)
       setListOfConversations(data)
 
       dispatch({ type: "SET_CHATS", payload: data})
@@ -48,7 +46,6 @@ export default function ConversationsList() {
     fetchOpenChats()
   }, [])
   
-  console.log(listOfConversations)
   
   return (
     <div className="d-flex flex-column conversation-list">
@@ -57,6 +54,7 @@ export default function ConversationsList() {
           <Row
             onClick={() => dispatch(getActiveChat(token, conversation._id))}
             className="d-flex single-conversation-container pl-2"
+            key={conversation._id}
           >
             <Image
               roundedCircle
@@ -65,7 +63,7 @@ export default function ConversationsList() {
               height={"10%"}
               className="conversation-list-avatar "
             />
-            <div className="d-flex flex-column details-list">
+            <div className="d-flex flex-column details-list" >
               <div className="d-flex justify-content-between mt-3">
                 <span>{conversation.members[1].username}</span>
                 <span className="last-message-date  pt-1">friday</span>
