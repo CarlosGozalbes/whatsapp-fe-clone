@@ -49,32 +49,33 @@ export default function ConversationsList() {
   
   return (
     <div className="d-flex flex-column conversation-list">
-      {
-        listOfConversations.map((conversation) => (
-          <Row
-            onClick={() => dispatch(getActiveChat(token, conversation._id))}
-            className="d-flex single-conversation-container pl-2"
-            key={conversation._id}
-          >
-            <Image
-              roundedCircle
-              src={avatar}
-              width={"10%"}
-              height={"10%"}
-              className="conversation-list-avatar "
-            />
-            <div className="d-flex flex-column details-list" >
-              <div className="d-flex justify-content-between mt-3">
-                <span>{conversation.members[1].username}</span>
-                <span className="last-message-date  pt-1">friday</span>
-              </div>
-              <span className="preview-truncate-message">
-                 {/* {conversation[0].members[1].info} */} 
-              </span>
+      {listOfConversations.map((conversation) => (
+        <Row
+          onClick={() => dispatch(getActiveChat(token, conversation._id))}
+          className="d-flex single-conversation-container pl-2"
+          key={conversation._id}
+        >
+          <Image
+            roundedCircle
+            src={conversation.members[1].avatar ? conversation.members[1].avatar : avatar}
+            width={"10%"}
+            height={"10%"}
+            className="conversation-list-avatar "
+          />
+          <div className="d-flex flex-column details-list">
+            <div className="d-flex justify-content-between mt-3">
+              <span>{conversation.members[1].username}</span>
+              <span className="last-message-date  pt-1">friday</span>
             </div>
-            {/* <div className="message-without-read align-self-end ml-2 mb-3"> 1 </div> */}
-          </Row>
-        ))}
+            <span className="preview-truncate-message">
+              {conversation.members[1].info
+                ? conversation.members[1].info
+                : "Hey there i'm using whatsApp"}
+            </span>
+          </div>
+          {/* <div className="message-without-read align-self-end ml-2 mb-3"> 1 </div> */}
+        </Row>
+      ))}
 
       {/* <SingleConversation />
       <SingleConversation />

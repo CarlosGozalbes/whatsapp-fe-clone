@@ -37,9 +37,7 @@ function MainPage() {
   return (
     <>
     
-      <Button variant="success" onClick={() => dispatch({ type: "EMIT_TEST" })}>
-        Send message
-      </Button>
+      
       <Row style={{ maxWidth: "100vw", marginRight: "0px", marginLeft: "0px" }}>
         <Col md={4} className="contacts-side-bar">
           <ContactsSideBar />
